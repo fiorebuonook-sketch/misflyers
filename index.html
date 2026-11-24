@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mis Flyers | Veltri Propiedades</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f3d2c">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mis Flyers">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0f3d2c;--gd:#0a3426;--gold:#bf9b52;--gold2:#d9c49a;--cream:#faf3eb;--ink:#1d1d1d;--mut:#6b6a63}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+header{text-align:center;padding:28px 16px 18px}
+.logo{font-family:Lora,serif;font-weight:700;font-size:clamp(54px,12vw,84px);line-height:1;color:var(--gd);letter-spacing:-1px}
+.sub{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:6px;font-weight:500;font-size:13px;letter-spacing:6px;color:var(--gd)}
+.sub i{display:block;width:40px;height:2px;background:var(--gold)}
+.prof{margin:22px auto 0;width:96px;height:96px;border-radius:50%;padding:3px;background:var(--gold);box-shadow:0 6px 18px rgba(10,52,38,.18)}
+.prof img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 30%;border:3px solid var(--cream);transform:scale(1.04)}
+.who{margin-top:12px;font-size:12px;font-weight:700;letter-spacing:4px;color:var(--gold)}
+h1{margin-top:2px;font-family:Lora,serif;font-style:italic;font-weight:600;font-size:clamp(24px,5vw,32px);color:var(--g)}
+.upd{margin-top:6px;font-size:13px;color:var(--mut)}
+.bar{position:sticky;top:0;z-index:5;background:var(--cream);border-bottom:1px solid var(--gold2);padding:12px 16px}
+.wrap{max-width:1100px;margin:0 auto}
+.search{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--gold2);border-radius:12px;padding:0 14px;height:48px}
+.search:focus-within{border-color:var(--g)}
+.search svg{flex:none;width:20px;height:20px;stroke:var(--g);fill:none;stroke-width:2}
+.search input{flex:1;border:0;outline:0;background:none;font:inherit;font-size:16px;color:var(--ink);min-width:0}
+.search button{border:0;background:none;color:var(--mut);font-size:22px;line-height:1;cursor:pointer;padding:4px}
+.chips{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--g);background:transparent;color:var(--g);font:inherit;font-weight:500;font-size:14px;padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--g);color:#fff}
+.sep{flex:none;width:1px;background:var(--gold2);margin:4px 2px}
+.count{padding:14px 16px 4px;font-size:14px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;padding:8px 16px 32px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(10,52,38,.08),0 4px 14px rgba(10,52,38,.06);cursor:pointer;text-align:left;border:0;font:inherit;color:inherit;display:flex;flex-direction:column;transition:transform .15s}
+.card:hover{transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.thumb{aspect-ratio:853/1600;overflow:hidden;background:#eee6da;position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.row{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.tag{background:var(--g);color:#fff;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 7px;border-radius:5px;text-transform:uppercase}
+.tag.alq{background:var(--gold);color:var(--gd)}
+.info{padding:10px 12px 12px;border-top:3px solid var(--gold)}
+.id{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px}
+.tt{font-family:Lora,serif;font-weight:700;font-size:15px;color:var(--g);margin-top:2px;line-height:1.25}
+.pr{font-weight:700;font-size:15px;margin-top:4px}
+.lc{font-size:13px;color:var(--mut);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{text-align:center;padding:48px 16px;color:var(--mut)}
+.empty b{display:block;font-family:Lora,serif;color:var(--g);font-size:20px;margin-bottom:6px}
+footer{background:var(--g);border-top:5px solid var(--gold);color:#fff;padding:22px 16px;text-align:center;font-size:14px}
+footer span{color:var(--gold2)}
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%}
+dialog::backdrop{background:rgba(10,52,38,.85)}
+.mv{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:12px}
+.mv img{max-width:100%;max-height:calc(100vh - 120px);border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.4);background:#fff}
+.acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;font:inherit;font-weight:700;font-size:15px;padding:12px 18px;cursor:pointer}
+.btn.pri{background:var(--gold);color:var(--gd)}
+.btn.sec{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2}
+.btn[hidden]{display:none}
+.btn.wab{background:#fff;color:var(--gd)}
+.btn .wa,.cw .wa{fill:currentColor;stroke:none}
+.cw{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:10px;border:1.5px solid var(--g);background:var(--g);color:#fff;font:inherit;font-weight:700;font-size:13px;padding:8px 6px;border-radius:9px;cursor:pointer}
+.cw .wa{width:16px;height:16px}
+.card{cursor:pointer}
+.msg{color:#fff;font-size:14px;min-height:20px;text-align:center}
+.x{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:26px;cursor:pointer}
+</style></head><body>
+<header>
+  <div class="logo">Veltri</div>
+  <div class="sub"><i></i>PROPIEDADES<i></i></div>
+  <div class="prof"><img src="moni.jpg" alt="Mónica"></div>
+  <div class="who">MÓNICA</div>
+  <h1>Mis Flyers</h1>
+  <p class="upd">Actualizado al 20 de noviembre de 2026</p>
+</header>
+<div class="bar"><div class="wrap">
+  <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+    <input id="q" type="search" placeholder="Buscar por código, dirección o zona" autocomplete="off" aria-label="Buscar flyer">
+    <button id="clr" aria-label="Borrar búsqueda" hidden>×</button></label>
+  <div class="chips" id="chips" role="group" aria-label="Filtros"></div>
+</div></div>
+<main class="wrap">
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+</main>
+<footer>Martín Veltri <span>|</span> Col. 805 <span>·</span> Veltri Propiedades</footer>
+<dialog id="dlg"><button class="x" id="close" aria-label="Cerrar">×</button>
+  <div class="mv"><img id="big" alt="">
+    <div class="acts">
+      <button class="btn wab" id="wab"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Enviar por WhatsApp o subir a Estado</button>
+      <button class="btn pri" id="dl" hidden><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar flyer</button>
+      <a class="btn sec" id="ficha" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>Ver publicación</a>
+    </div>
+    <p class="msg" id="msg"></p>
+  </div>
+</dialog>
+<script>
+const D=[{"id": "KP609318", "titulo": "Departamento 2 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 93.000", "dir": "Patricios 400, Bernal", "zona": "Torre B2 · Quilmes"}, {"id": "KP606274", "titulo": "Triplex 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 184.900", "dir": "Don Bosco 473, Bernal", "zona": "Barrio cerrado · Quilmes"}, {"id": "KP606250", "titulo": "Casa 3 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 134.900", "dir": "Calle 19 al 5000", "zona": "Berazategui"}, {"id": "KP605349", "titulo": "PH 3 Ambientes", "op": "Venta", "tipo": "PH", "precio": "USD 85.000", "dir": "Edmundo Fierro al 200", "zona": "Bernal Este · Quilmes"}, {"id": "KP599778", "titulo": "Galpón Industrial a Estrenar", "op": "Alquiler", "tipo": "Comercial", "precio": "USD 11.000", "dir": "Florencio Varela", "zona": "Parque Industrial PITEC 2"}, {"id": "KP587604", "titulo": "Casa 4 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 95.000", "dir": "Viejo Bueno al 1400", "zona": "Bernal Oeste · Quilmes"}, {"id": "KP581763", "titulo": "PH 3 Ambientes", "op": "Venta", "tipo": "PH", "precio": "USD 93.000", "dir": "Rep. del Líbano al 1100", "zona": "Quilmes"}, {"id": "KP574705", "titulo": "Casa 5 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 149.000", "dir": "Vta. de Obligado 555", "zona": "Bernal Este · Quilmes"}, {"id": "KP574696", "titulo": "Galpón Industrial a Estrenar", "op": "Venta", "tipo": "Comercial", "precio": "USD 1.800.000", "dir": "Florencio Varela", "zona": "Parque Industrial PITEC 2"}, {"id": "KP574687", "titulo": "Oficina de 75 m²", "op": "Alquiler", "tipo": "Comercial", "precio": "USD 1.000", "dir": "Av. Caseros 1750", "zona": "Don Bosco · Quilmes"}, {"id": "KP574442", "titulo": "Casa 4 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 262.000", "dir": "Dorrego 112", "zona": "Bernal · Quilmes"}, {"id": "KP574362", "titulo": "Casa 3 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 139.000", "dir": "Urquiza 328", "zona": "Quilmes"}, {"id": "KP574361", "titulo": "Galpón de 259 m²", "op": "Venta", "tipo": "Comercial", "precio": "USD 169.000", "dir": "Calle Carabelas", "zona": "Bernal · Quilmes"}, {"id": "KP574360", "titulo": "6 Locales Comerciales en Bloque", "op": "Venta", "tipo": "Comercial", "precio": "USD 239.000", "dir": "Av. Gral. Mosconi 2270", "zona": "Esq. Ayolas · Quilmes Oeste"}, {"id": "KP574330", "titulo": "Casa 2 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 115.000", "dir": "9 de Julio 838", "zona": "Bernal Oeste · Quilmes"}, {"id": "KP574305", "titulo": "Piso de Categoría · 4 Amb.", "op": "Venta", "tipo": "Departamento", "precio": "USD 299.000", "dir": "Moreno 336", "zona": "Quilmes Centro"}, {"id": "KP574304", "titulo": "Casa 3 Ambientes", "op": "Alquiler", "tipo": "Casa", "precio": "USD 900", "dir": "Luis María Campos 529", "zona": "Bernal Oeste · Quilmes"}, {"id": "KP574296", "titulo": "PH 3 Ambientes", "op": "Venta", "tipo": "PH", "precio": "USD 115.000", "dir": "Don Bosco 18", "zona": "Bernal · Quilmes"}, {"id": "KP574279", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 169.900", "dir": "Av. San Martín 364", "zona": "Bernal Centro · Quilmes"}, {"id": "KP574278", "titulo": "Departamento 2 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 144.500", "dir": "25 de Mayo 50", "zona": "Bernal · Quilmes"}, {"id": "KP574277", "titulo": "Piso de Categoría · 5 Amb.", "op": "Venta", "tipo": "Departamento", "precio": "USD 319.900", "dir": "Alem 420", "zona": "Quilmes Centro"}, {"id": "KP574237", "titulo": "Casa / Lote R2", "op": "Venta", "tipo": "Casa", "precio": "USD 149.000", "dir": "Alvear 216", "zona": "Quilmes"}, {"id": "KP574229", "titulo": "Casa 4 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 249.000", "dir": "Juan B. Justo 443", "zona": "Don Bosco · Quilmes"}, {"id": "KP574217", "titulo": "Casa 3 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 129.000", "dir": "Saavedra 362", "zona": "Quilmes"}, {"id": "KP573824", "titulo": "Departamento 2 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 119.000", "dir": "Av. San Martín 364", "zona": "Bernal Centro · Quilmes"}, {"id": "KP573709", "titulo": "Casa 5 Ambientes", "op": "Alquiler", "tipo": "Casa", "precio": "USD 5.800", "dir": "Av. Caseros 1751", "zona": "Nuevo Quilmes"}, {"id": "KP572830", "titulo": "Casa 4 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 320.000", "dir": "Almirante Brown 933", "zona": "Quilmes"}, {"id": "KP572792", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 199.000", "dir": "25 de Mayo 62", "zona": "Bernal Centro · Quilmes"}, {"id": "KP572756", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 180.000", "dir": "Av. H. Yrigoyen 933", "zona": "6.º piso · Quilmes"}, {"id": "KP572659", "titulo": "Galpón / Local / Depósito", "op": "Venta", "tipo": "Comercial", "precio": "USD 180.000", "dir": "E. Fierro al 200", "zona": "Bernal · Quilmes"}, {"id": "KP572606", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 239.000", "dir": "Caseros y Carabelas", "zona": "Don Bosco · Quilmes"}, {"id": "KP572590", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 159.000", "dir": "Av. San Martín 364", "zona": "Bernal Centro · Quilmes"}, {"id": "KP572501", "titulo": "Casa 5 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 1.350.000", "dir": "Av. Caseros 1751", "zona": "Nuevo Quilmes"}, {"id": "KP572159", "titulo": "Casa 6 Ambientes", "op": "Venta", "tipo": "Casa", "precio": "USD 790.000", "dir": "Av. Caseros 1751", "zona": "Nuevo Quilmes"}, {"id": "KP572114", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 310.000", "dir": "Av. Caseros 1751", "zona": "Nuevo Quilmes"}, {"id": "KP572108", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 205.000", "dir": "Don Bosco 31", "zona": "Bernal Centro · Quilmes"}, {"id": "KP571775", "titulo": "Departamento 3 Ambientes", "op": "Venta", "tipo": "Departamento", "precio": "USD 174.900", "dir": "Av. San Martín 364", "zona": "Bernal · Quilmes"}];
+const $=s=>document.querySelector(s);
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const F=[['op','Todos'],['op','Venta'],['op','Alquiler'],null,['tipo','Casa'],['tipo','Departamento'],['tipo','PH'],['tipo','Comercial']];
+const st={op:'Todos',tipo:null,q:''};
+const chips=$('#chips');
+F.forEach(f=>{if(!f){const s=document.createElement('span');s.className='sep';chips.append(s);return}
+  const b=document.createElement('button');b.className='chip';b.textContent=f[1];b.dataset.k=f[0];b.dataset.v=f[1];
+  b.onclick=()=>{if(f[0]==='op')st.op=f[1];else st.tipo=st.tipo===f[1]?null:f[1];render()};chips.append(b)});
+const grid=$('#grid');
+function render(){
+  chips.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.k==='op'?st.op===b.dataset.v:st.tipo===b.dataset.v)?'true':'false'));
+  const q=norm(st.q.trim());
+  const L=D.filter(x=>(st.op==='Todos'||x.op===st.op)&&(!st.tipo||x.tipo===st.tipo)&&(!q||norm([x.id,x.titulo,x.dir,x.zona,x.precio,x.tipo].join(' ')).includes(q)||norm(x.id).includes(q.replace(/\s/g,''))));
+  $('#count').textContent=L.length===1?'1 flyer':L.length+' flyers';
+  grid.innerHTML='';
+  if(!L.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1"><b>No encontramos flyers</b>Probá con otro código o dirección.</div>';return}
+  for(const x of L){const c=document.createElement('div');c.className='card';c.tabIndex=0;c.setAttribute('role','button');c.setAttribute('aria-label','Ver flyer '+x.titulo+' '+x.id);
+    c.innerHTML=`<div class="thumb"><img loading="lazy" src="${x.id}_mini.jpg" alt=""></div>
+    <div class="info"><div class="row"><span class="id">${x.id}</span><span class="tag ${x.op==='Alquiler'?'alq':''}">${x.op}</span></div><div class="tt">${x.titulo}</div><div class="pr">${x.precio}</div><div class="lc">${x.dir} · ${x.zona}</div><button class="cw" aria-label="Enviar por WhatsApp ${x.id}"><svg class="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp / Estado</button></div>`;
+    c.onclick=()=>open(x);c.onkeydown=e=>{if(e.key==='Enter')open(x)};
+    c.querySelector('.cw').onclick=e=>{e.stopPropagation();sendWA(x,null)};grid.append(c)}
+}
+const q=$('#q');q.oninput=()=>{st.q=q.value;$('#clr').hidden=!q.value;render()};
+$('#clr').onclick=e=>{e.preventDefault();q.value='';st.q='';$('#clr').hidden=true;render();q.focus()};
+const dlg=$('#dlg');let cur=null,dl=null;
+function open(x){cur=x;try{getFile(x)}catch(e){}$('#big').src=x.id+'.jpg';$('#big').alt='Flyer '+x.id;$('#msg').textContent='';
+  $('#ficha').href='https://veltripropiedades.com.ar/p/'+x.id.replace('KP','')+'?fw_uid=10765';
+  try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}}
+$('#close').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target.classList.contains('mv'))dlg.close()});
+render();
+$('#dl').hidden=false;
+const blobs={};
+const getFile=async x=>{if(!blobs[x.id])blobs[x.id]=fetch(x.id+'.jpg').then(r=>{if(!r.ok)throw 0;return r.blob()}).then(b=>new File([b],'Flyer_'+x.id+'.jpg',{type:'image/jpeg'}));return blobs[x.id]};
+const ficha=x=>'https://veltripropiedades.com.ar/p/'+x.id.replace('KP','')+'?fw_uid=10765';
+const texto=x=>x.titulo+' en '+x.op.toLowerCase()+' · '+x.precio+'\n'+x.dir+' · '+x.zona+'\n'+x.id+' · Veltri Propiedades\n'+ficha(x);
+const mobile=/Android|iPhone|iPad/i.test(navigator.userAgent);
+async function sendWA(x,m){
+  try{const f=await getFile(x);
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:texto(x)});if(m)m.textContent='';return}
+    const u=URL.createObjectURL(f);const a=document.createElement('a');a.href=u;a.download=f.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+    window.open('https://wa.me/?text='+encodeURIComponent(texto(x)),'_blank');
+    if(m)m.textContent='Se descargó el flyer: adjuntalo en el chat de WhatsApp que se abrió.'}
+  catch(e){if(m)m.textContent=(e&&e.name==='AbortError')?'':'No se pudo compartir. Descargá el flyer y compartilo desde la galería del celular.'}}
+$('#wab').onclick=()=>{if(cur)sendWA(cur,$('#msg'))};
+$('#dl').onclick=async()=>{if(!cur)return;const m=$('#msg');m.textContent='Preparando…';
+  try{const b=await fetch(cur.id+'.jpg').then(r=>{if(!r.ok)throw 0;return r.blob()});
+    const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='Flyer_'+cur.id+'.jpg';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);m.textContent='Listo, flyer descargado.'}
+  catch(e){m.textContent=(e&&e.name==='AbortError')?'':'Si no se descargó, mantené apretada la imagen para guardarla.'}};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
