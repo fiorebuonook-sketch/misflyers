@@ -22,7 +22,7 @@ async function img(){
   c.fillStyle='#e2cf9f';c.font='700 27px "DM Sans"';ls(c,'9px');c.fillText(P.cargo.toUpperCase(),W/2+4,890);ls(c,'0px');
   c.fillStyle='#c2a05a';c.fillRect(W/2-50,935,100,3);
   c.fillStyle='rgba(250,243,235,.92)';c.font='500 36px "DM Sans"';c.fillText('WhatsApp  '+P.tel,W/2,1020);c.fillText(P.mail,W/2,1082);c.fillText('@'+P.ig,W/2,1144);
-  c.fillStyle='rgba(250,243,235,.6)';c.font='500 26px "DM Sans"';c.fillText('Veltri Propiedades · '+P.zona,W/2,1260);
+  
   c.fillStyle='#c2a05a';c.fillRect(0,H-10,W,10);
   return new Promise(res=>cv.toBlob(b=>res(new File([b],'Tarjeta_Monica_Feltrinelli.png',{type:'image/png'})),'image/png'));
 }
@@ -32,7 +32,6 @@ $('#kSend').onclick=async()=>{try{const f=await img();
   if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:msg()});return}
   dl(f);window.open('https://wa.me/?text='+encodeURIComponent(msg()),'_blank');toast('Se descargó tu tarjeta: adjuntala en el chat que se abrió.')}
   catch(e){if(e?.name!=='AbortError')toast('No se pudo compartir. Probá de nuevo.')}};
-$('#kCopy').onclick=async()=>{try{await navigator.clipboard.writeText(base+'#contacto');toast('Link copiado.')}catch(e){toast(base+'#contacto')}};
 $('#kSave').onclick=async()=>{let photo='';try{const b=await fetch('moni.jpg').then(r=>r.blob());photo=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result.split(',')[1]);fr.readAsDataURL(b)})}catch(e){}
   const v=['BEGIN:VCARD','VERSION:3.0','N:Feltrinelli;Mónica;;;','FN:'+P.nombre,'ORG:Veltri Propiedades','TITLE:'+P.cargo,'TEL;TYPE=CELL:'+P.telI,'EMAIL;TYPE=WORK:'+P.mail,'URL:'+base+'#contacto','X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/'+P.ig+'/',photo?'PHOTO;ENCODING=b;TYPE=JPEG:'+photo:'','END:VCARD'].filter(Boolean).join('\r\n');
   dl(new File([v],'Monica_Feltrinelli.vcf',{type:'text/vcard'}));toast('Abrí el archivo descargado para guardar el contacto.')};
