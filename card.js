@@ -2,7 +2,7 @@
 const P={nombre:'Mónica Feltrinelli',corto:'Mónica',cargo:'Asesora inmobiliaria',zona:'Bernal · Quilmes',tel:'11 5045-3972',wa:'5491150453972',telI:'+541150453972',mail:'moni@veltripropiedades.com.ar',ig:'monicafeltrinelli_realestate'};
 const $=s=>document.querySelector(s);
 const base=location.origin+location.pathname;
-const msg=()=>`¡Hola! Soy ${P.nombre}, ${P.cargo.toLowerCase()} de Veltri Propiedades. Te dejo mi tarjeta con mis datos y mis propiedades disponibles: ${base}#contacto`;
+const msg=()=>`¡Hola! Soy ${P.nombre}, ${P.cargo.toLowerCase()} de Veltri Propiedades. Te dejo mi tarjeta con mis datos de contacto.`;
 $('#kWa').href='https://wa.me/'+P.wa;$('#kTel').href='tel:'+P.telI;$('#kIg').href='https://www.instagram.com/'+P.ig+'/';$('#kMail').href='mailto:'+P.mail;
 function toast(m){const t=$('#ctoast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3500)}
 function ls(c,v){if('letterSpacing' in c)c.letterSpacing=v}
@@ -33,6 +33,6 @@ $('#kSend').onclick=async()=>{try{const f=await img();
   dl(f);window.open('https://wa.me/?text='+encodeURIComponent(msg()),'_blank');toast('Se descargó tu tarjeta: adjuntala en el chat que se abrió.')}
   catch(e){if(e?.name!=='AbortError')toast('No se pudo compartir. Probá de nuevo.')}};
 $('#kSave').onclick=async()=>{let photo='';try{const b=await fetch('moni.jpg').then(r=>r.blob());photo=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result.split(',')[1]);fr.readAsDataURL(b)})}catch(e){}
-  const v=['BEGIN:VCARD','VERSION:3.0','N:Feltrinelli;Mónica;;;','FN:'+P.nombre,'ORG:Veltri Propiedades','TITLE:'+P.cargo,'TEL;TYPE=CELL:'+P.telI,'EMAIL;TYPE=WORK:'+P.mail,'URL:'+base+'#contacto','X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/'+P.ig+'/',photo?'PHOTO;ENCODING=b;TYPE=JPEG:'+photo:'','END:VCARD'].filter(Boolean).join('\r\n');
+  const v=['BEGIN:VCARD','VERSION:3.0','N:Feltrinelli;Mónica;;;','FN:'+P.nombre,'ORG:Veltri Propiedades','TITLE:'+P.cargo,'TEL;TYPE=CELL:'+P.telI,'EMAIL;TYPE=WORK:'+P.mail,'X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/'+P.ig+'/',photo?'PHOTO;ENCODING=b;TYPE=JPEG:'+photo:'','END:VCARD'].filter(Boolean).join('\r\n');
   dl(new File([v],'Monica_Feltrinelli.vcf',{type:'text/vcard'}));toast('Abrí el archivo descargado para guardar el contacto.')};
 })();
