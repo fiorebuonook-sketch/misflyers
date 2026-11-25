@@ -423,7 +423,7 @@ function render(){
 const q=$('#q');q.oninput=()=>{st.q=q.value;$('#clr').hidden=!q.value;render()};$('#clr').onclick=e=>{e.preventDefault();q.value='';st.q='';$('#clr').hidden=true;render()};
 const blobs={};const getFile=x=>blobs[x.id]??=fetch(x.id+'.jpg').then(r=>{if(!r.ok)throw 0;return r.blob()}).then(b=>new File([b],'Flyer_'+x.id+'.jpg',{type:'image/jpeg'}));
 const ficha=x=>'https://veltripropiedades.com.ar/p/'+x.id.slice(2)+'?fw_uid=10765';
-const texto=x=>x.titulo+' en '+x.op.toLowerCase()+' · '+x.precio+'\n'+x.dir+' · '+x.zona+'\n'+x.id+' · Veltri Propiedades\n'+ficha(x);
+const texto=x=>ficha(x);
 async function sendWA(x,m){try{const f=await getFile(x);
   if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:texto(x)});return}
   dlFile(f);window.open('https://wa.me/?text='+encodeURIComponent(texto(x)),'_blank');if(m)m.textContent='Se descargó el flyer: adjuntalo en el chat que se abrió.'}
