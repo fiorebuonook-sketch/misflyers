@@ -1,6 +1,6 @@
 (function(){
 const $=i=>document.getElementById(i);
-const st={tab:'alq',ag:50,cur:'$',pct1:4,iva1:false,pv:3,pc:4,iva:'none'};
+const st={tab:'alq',ag:50,cur:'$',pct1:4,iva1:false,pv:3,pc:4,ivaC:false,ivaV:false};
 const D={};
 const num=v=>{v=String(v||'').trim().replace(/\./g,'').replace(',','.');const n=parseFloat(v);return isFinite(n)&&n>0?n:0};
 const money=(n,c)=>c+' '+n.toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2});
@@ -18,8 +18,9 @@ seg('sP1','pct1',[1,2,3,4,5],v=>v+'%');
 seg('sIva1','iva1',[false,true],v=>v?'Con IVA':'Sin IVA');
 seg('sPv','pv',[1,2,3,4,5],v=>v+'%');
 seg('sPc','pc',[1,2,3,4,5],v=>v+'%');
-seg('sIva','iva',['none','buyer','seller'],v=>({none:'Sin IVA',buyer:'Comprador',seller:'Vendedor'})[v]);
-const map={sAg:'ag',sCur:'cur',sP1:'pct1',sIva1:'iva1',sPv:'pv',sPc:'pc',sIva:'iva'};
+seg('sIvaV','ivaV',[false,true],v=>v?'Con IVA':'Sin IVA');
+seg('sIvaC','ivaC',[false,true],v=>v?'Con IVA':'Sin IVA');
+const map={sAg:'ag',sCur:'cur',sP1:'pct1',sIva1:'iva1',sPv:'pv',sPc:'pc',sIvaV:'ivaV',sIvaC:'ivaC'};
 function paint(){for(const id in map)$(id).querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v)===String(st[map[id]])));
   document.querySelectorAll('.ctab').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===st.tab));
   $('cAlq').hidden=st.tab!=='alq';$('cVen').hidden=st.tab!=='ven';
@@ -38,7 +39,7 @@ function calc(){
   rep('rp1',hon,c);rep('rp1o',ownV,c);
   D.alq={title:'Gastos de alquiler',cur:c,extra:[['Alquiler mensual',money(rent,c)],['Duración',m+' meses']],sections:[{name:'Inquilino',lines:list,tot},{name:'Propietario',lines:ol,tot:ownV}],
     reparto:[mk('Reparto · punta inquilino',hon),mk('Reparto · punta propietario',ownV)].filter(g=>g.base>0)};
-  const U='US$',p=num($('price').value),pv=st.pv,pc=st.pc,hv=p*pv/100,hc=p*pc/100,net=hv+hc,ivaB=st.iva==='buyer'?hc*.21:0,ivaS=st.iva==='seller'?hv*.21:0;
+  const U='US$',p=num($('price').value),pv=st.pv,pc=st.pc,hv=p*pv/100,hc=p*pc/100,net=hv+hc,ivaB=st.ivaC?hc*.21:0,ivaS=st.ivaV?hv*.21:0;
   const side=(n,h,pp,v)=>{const L=[{l:'Honorarios inmobiliarios',s:pp+'% del valor',v:h}];if(v)L.push({l:'IVA 21%',s:'sobre honorarios',v});return{name:n,lines:L,tot:h+v}};
   const sb=side('Comprador',hc,pc,ivaB),ss=side('Vendedor',hv,pv,ivaS);
   $('r2c').innerHTML=rows(sb.lines,U);$('t2c').textContent=money(sb.tot,U);$('r2v').innerHTML=rows(ss.lines,U);$('t2v').textContent=money(ss.tot,U);
