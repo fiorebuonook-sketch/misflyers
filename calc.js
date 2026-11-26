@@ -11,7 +11,7 @@ document.querySelectorAll('#calc input[data-m]').forEach(el=>el.addEventListener
   el.value=d!==undefined?s+','+d.slice(0,2):s;calc()}));
 document.querySelectorAll('#calc input:not([data-m])').forEach(el=>el.addEventListener('input',calc));
 // controles segmentados
-function seg(id,key,vals,fmt){const box=$(id);box.innerHTML='';vals.forEach(v=>{const b=document.createElement('button');b.type='button';b.textContent=fmt?fmt(v):v;b.onclick=()=>{st[key]=v;paint();calc()};b.dataset.v=v;box.append(b)})}
+function seg(id,key,vals,fmt){const box=$(id);if(!box)return;box.innerHTML='';vals.forEach(v=>{const b=document.createElement('button');b.type='button';b.textContent=fmt?fmt(v):v;b.onclick=()=>{st[key]=v;paint();calc()};b.dataset.v=v;box.append(b)})}
 seg('sAg','ag',[50,70,90],v=>v+'%');
 seg('sCur','cur',['$','US$'],v=>v==='$'?'Pesos':'Dólares');
 seg('sP1','pct1',[1,2,3,4,5],v=>v+'%');
@@ -22,7 +22,7 @@ seg('sPc','pc',[1,2,3,4,5],v=>v+'%');
 seg('sIvaV','ivaV',[false,true],v=>v?'Con IVA':'Sin IVA');
 seg('sIvaC','ivaC',[false,true],v=>v?'Con IVA':'Sin IVA');
 const map={sAg:'ag',sCur:'cur',sP1:'pct1',sIva1:'iva1',sIva1o:'iva1o',sPv:'pv',sPc:'pc',sIvaV:'ivaV',sIvaC:'ivaC'};
-function paint(){for(const id in map)$(id).querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v)===String(st[map[id]])));
+function paint(){for(const id in map)$(id)?.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v)===String(st[map[id]])));
   document.querySelectorAll('.ctab').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===st.tab));
   $('cAlq').hidden=st.tab!=='alq';$('cVen').hidden=st.tab!=='ven';
   document.querySelectorAll('.curs').forEach(e=>e.textContent=st.cur)}

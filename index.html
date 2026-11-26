@@ -494,4 +494,4 @@ function confetti(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)ret
   let t=0;(function f(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.y+=p.vy;p.x+=p.vx+Math.sin((t+p.y)/30)*.6;p.r+=p.vr;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore()});t++;if(t<260)requestAnimationFrame(f);else c.remove()})()}
 bday(false);addEventListener('hashchange',route);route();reveal();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script><script src="calc.js"></script><script src="card.js"></script></body></html>
+</script><script src="calc.js?v=18"></script><script src="card.js?v=18"></script></body></html>
