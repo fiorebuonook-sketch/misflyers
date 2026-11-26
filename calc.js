@@ -1,6 +1,6 @@
 (function(){
 const $=i=>document.getElementById(i);
-const st={tab:'alq',ag:50,cur:'$',pct1:4,iva1:false,pv:3,pc:4,ivaC:false,ivaV:false};
+const st={tab:'alq',ag:50,cur:'$',pct1:4,iva1:false,iva1o:false,pv:3,pc:4,ivaC:false,ivaV:false};
 const D={};
 const num=v=>{v=String(v||'').trim().replace(/\./g,'').replace(',','.');const n=parseFloat(v);return isFinite(n)&&n>0?n:0};
 const money=(n,c)=>c+' '+n.toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:2});
@@ -16,11 +16,12 @@ seg('sAg','ag',[50,70,90],v=>v+'%');
 seg('sCur','cur',['$','US$'],v=>v==='$'?'Pesos':'Dólares');
 seg('sP1','pct1',[1,2,3,4,5],v=>v+'%');
 seg('sIva1','iva1',[false,true],v=>v?'Con IVA':'Sin IVA');
+seg('sIva1o','iva1o',[false,true],v=>v?'Con IVA':'Sin IVA');
 seg('sPv','pv',[1,2,3,4,5],v=>v+'%');
 seg('sPc','pc',[1,2,3,4,5],v=>v+'%');
 seg('sIvaV','ivaV',[false,true],v=>v?'Con IVA':'Sin IVA');
 seg('sIvaC','ivaC',[false,true],v=>v?'Con IVA':'Sin IVA');
-const map={sAg:'ag',sCur:'cur',sP1:'pct1',sIva1:'iva1',sPv:'pv',sPc:'pc',sIvaV:'ivaV',sIvaC:'ivaC'};
+const map={sAg:'ag',sCur:'cur',sP1:'pct1',sIva1:'iva1',sIva1o:'iva1o',sPv:'pv',sPc:'pc',sIvaV:'ivaV',sIvaC:'ivaC'};
 function paint(){for(const id in map)$(id).querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v)===String(st[map[id]])));
   document.querySelectorAll('.ctab').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===st.tab));
   $('cAlq').hidden=st.tab!=='alq';$('cVen').hidden=st.tab!=='ven';
@@ -34,10 +35,10 @@ function calc(){
   const hon=rent*m*pct/100,ownV=rent*own,iv=st.iva1?hon*.21:0,tot=Math.max(rent+dep+hon+iv+firm+inf-res,0);
   const list=[{l:'Mes de ingreso',v:rent},{l:'Depósito',v:dep},{l:'Honorarios inmobiliarios',s:pct+'% sobre '+m+' meses',v:hon},{l:'Certificación de firmas',v:firm},{l:'Informes',v:inf},{l:'Reserva ya abonada',v:res,neg:true}];
   if(iv)list.splice(3,0,{l:'IVA 21%',s:'sobre honorarios inmobiliarios',v:iv});
-  const ol=[{l:'Honorarios inmobiliarios',s:own+' '+(own===1?'mes':'meses')+' de alquiler',v:ownV}];
-  $('r1').innerHTML=rows(list,c);$('t1').textContent=money(tot,c);$('r1o').innerHTML=rows(ol,c);$('t1o').textContent=money(ownV,c);
+  const ivO=st.iva1o?ownV*.21:0,totO=ownV+ivO;const ol=[{l:'Honorarios inmobiliarios',s:own+' '+(own===1?'mes':'meses')+' de alquiler',v:ownV}];if(ivO)ol.push({l:'IVA 21%',s:'sobre honorarios inmobiliarios',v:ivO});
+  $('r1').innerHTML=rows(list,c);$('t1').textContent=money(tot,c);$('r1o').innerHTML=rows(ol,c);$('t1o').textContent=money(totO,c);
   rep('rp1',hon,c);rep('rp1o',ownV,c);
-  D.alq={title:'Gastos de alquiler',cur:c,extra:[['Alquiler mensual',money(rent,c)],['Duración',m+' meses']],sections:[{name:'Inquilino',lines:list,tot},{name:'Propietario',lines:ol,tot:ownV}],
+  D.alq={title:'Gastos de alquiler',cur:c,extra:[['Alquiler mensual',money(rent,c)],['Duración',m+' meses']],sections:[{name:'Inquilino',lines:list,tot},{name:'Propietario',lines:ol,tot:totO}],
     reparto:[mk('Reparto · punta inquilino',hon),mk('Reparto · punta propietario',ownV)].filter(g=>g.base>0)};
   const U='US$',p=num($('price').value),pv=st.pv,pc=st.pc,hv=p*pv/100,hc=p*pc/100,net=hv+hc,ivaB=st.ivaC?hc*.21:0,ivaS=st.ivaV?hv*.21:0;
   const side=(n,h,pp,v)=>{const L=[{l:'Honorarios inmobiliarios',s:pp+'% del valor',v:h}];if(v)L.push({l:'IVA 21%',s:'sobre honorarios',v});return{name:n,lines:L,tot:h+v}};
