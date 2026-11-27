@@ -95,7 +95,7 @@ function send(idx,internal){calc();const x=D[st.tab];const secs=idx==null?x.sect
   if(cli)info.push(['Para',cli]);if(dir)info.push(['Propiedad',dir]);info.push(...x.extra);
   const n=(internal?'liquidacion-completa':'honorarios')+'.png';
   draw({title:ttl,sections:secs,reparto:internal?x.reparto:null,totAg:x.totAg,internal,cur:x.cur,info,ag}).then(b=>{const f=new File([b],n,{type:'image/png'});
-    if(navigator.canShare&&navigator.canShare({files:[f]}))return navigator.share({files:[f],title:ttl}).catch(e=>{if(e?.name!=='AbortError')save(b,n)});save(b,n)})}
+    if(navigator.canShare&&navigator.canShare({files:[f]}))return navigator.share({files:[f]}).catch(e=>{if(e?.name!=='AbortError')save(b,n)});save(b,n)})}
 $('bt1').onclick=()=>send(0);$('bt2').onclick=()=>send(1);$('btL').onclick=()=>send(null,true);
 paint();calc();
 })();
